@@ -1,4 +1,13 @@
+using FilmesAPI.Data;
+using Microsoft.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("FilmeConnection");
+
+builder.Services.AddDbContext<FilmeContext>(opts => opts.UseMySql(connectionString, 
+    MySqlServerVersion.AutoDetect(connectionString)));
 
 // Add services to the container.
 
