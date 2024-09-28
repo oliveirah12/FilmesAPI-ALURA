@@ -36,11 +36,12 @@ public class CinemaController : ControllerBase
     [HttpGet]
     public IEnumerable<ReadCinemaDto> RecuperaCinemas()
     {
-        return _mapper.Map<List<ReadCinemaDto>>(_context.Cinemas.ToList());
+        var listaDeCinemas = _mapper.Map<List<ReadCinemaDto>>(_context.Cinemas.ToList());
+        return listaDeCinemas;
 
     }
 
-    [HttpGet("id}")]
+    [HttpGet("{id}")]
     public IActionResult RecuperaCinemaPorId(int id)
     {
         var cinema = _context.Cinemas.FirstOrDefault(cinema => cinema.Id == id);
@@ -67,7 +68,7 @@ public class CinemaController : ControllerBase
 
     }
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public IActionResult DeletaCinema(int id) {
         
         Cinema cinema = _context.Cinemas.FirstOrDefault(cinema => cinema.Id == id);
